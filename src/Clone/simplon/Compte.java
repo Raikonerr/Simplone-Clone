@@ -7,17 +7,19 @@ public class Compte {
    protected String nom;
    protected String prenom;
    protected String email;
+   protected String password;
    protected int role;
 
 
 
 
-    public Compte(int id, String nom, String prenom, String email, int role) {
+    public Compte(int id, String nom, String prenom, String email, String password) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-        this.role = role;
+        this.password = password;
+
     }
 
     public Compte(){

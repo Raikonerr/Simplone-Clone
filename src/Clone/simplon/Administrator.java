@@ -9,112 +9,168 @@ import models.SendRequestMessageRouting;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.*;
-public class Administrator  extends  Compte {
-    ArrayList<Apprenant> apprenants = new ArrayList<Apprenant>();
-    ArrayList<Formateur> formateurs = new ArrayList<Formateur>();
-    ArrayList<Brief> briefs = new ArrayList<Brief>();
+public class Administrator  extends  Connect  {
+
+    Apprenant apprenants = new Apprenant();
+    Formateur formateurs = new Formateur();
+
+    Brief briefs = new Brief();
+
+
+
+
+
+
+
+
     int userId = 0 ;
 
-    ArrayList<Promo> promos = new ArrayList<Promo>();
 
-    public Administrator(int id, String nom, String prenom, String email, int role) {
-        super(id, nom, prenom, email, role);
+
+    public Administrator() {
+
     }
 
     //login with id
    public void loginFormateur(){
          Scanner sc = new Scanner(System.in);
-         System.out.println("Entrer votre id : ");
-         int id = sc.nextInt();
-         for (Formateur formateur : formateurs) {
-              if (formateur.getId() == id) {
-                System.out.println("Bienvenue " + formateur.getNom());
-                userId = id;
-              }
-         }
+        System.out.println("Enter your mail : ");
+        String mail = sc.nextLine();
+        System.out.println("Enter your password : ");
+        String password = sc.nextLine();
+        try{
+            loginFormateur(mail,password);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
    }
 
    public void loginApprenant() {
+     Scanner sc = new Scanner(System.in);
+        System.out.println("Enter your mail : ");
+        String mail = sc.nextLine();
+        System.out.println("Enter your password : ");
+        String password = sc.nextLine();
+        try{
+            loginApprenant(password,mail);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+   }
+
+   public void loginAdmin() {
        Scanner sc = new Scanner(System.in);
-       System.out.println("Entrer votre id : ");
-       int id = sc.nextInt();
-       for (Apprenant apprenant : apprenants) {
-           if (apprenant.getId() == id) {
-               System.out.println("Bienvenue " + apprenant.getNom());
-           }
+       System.out.println("Enter your mail : ");
+       String mail = sc.nextLine();
+       System.out.println("Enter your password : ");
+       String password = sc.nextLine();
+       try {
+           loginAdmin(mail, password);
+       } catch (Exception e) {
+           System.out.println(e);
        }
    }
 
 
 
 
-    public void afficherMenu(){
-        System.out.println("1. Gestion des comptes");
-        System.out.println("2. Gestion des promos");
-        System.out.println("3. Gestion des briefs");
-        System.out.println("4. Quitter");
-    }
+
     public void addApprenant(){
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Entrer l'id du apprenant");
-        int id = sc.nextInt();
+
         System.out.println("Entrer le nom du apprenant");
         String nom = sc.next();
         System.out.println("Entrer le prenom du apprenant");
         String prenom = sc.next();
         System.out.println("Entrer l'email du apprenant");
         String email = sc.next();
+        System.out.println("Entrer le mot de passe du apprenant");
+        String password = sc.next();
+        System.out.println("Entrer l'id de la promotion");
+        int promoid = sc.nextInt();
+        try{
+            insertApprenant(nom,prenom,email,password,promoid);
+        }catch (Exception e){
+            System.out.println(e);
+        }
 
-        Apprenant apprenant = new Apprenant(id, nom, prenom, email, 1);
-        apprenants.add(apprenant);
+
     }
     //afficher un apprenant
     public void afficherApprenant(){
-        for (Apprenant apprenant : apprenants) {
-            System.out.println(apprenant.toString());
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Entrer l'id du apprenant");
+        int id = sc.nextInt();
+        try{
+            afficherApprenant(id);
+        }catch (Exception e){
+            System.out.println(e);
         }
     }
     //ajouter un formateur
     public void addFormateur(){
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Entrer l'id du formateur");
-        int id = sc.nextInt();
+
         System.out.println("Entrer le nom du formateur");
         String nom = sc.next();
         System.out.println("Entrer le prenom du formateur");
         String prenom = sc.next();
         System.out.println("Entrer l'email du formateur");
         String email = sc.next();
+        System.out.println("Entrer le mot de passe du formateur");
+        String password = sc.next();
+        System.out.println("Entrer l'id de la promotion");
+        int promoid = sc.nextInt();
+        try{
+            insertFormateur(nom,prenom,email,password,promoid);
+        }catch (Exception e){
+            System.out.println(e);
+        }
 
 
-        Formateur formateur = new Formateur(id, nom, prenom, email, 2);
-        formateurs.add(formateur);
+
 
     }
     public void afficherFormateur(){
-        for (Formateur formateur : formateurs) {
-            System.out.println(formateur.toString());
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Entrer l'id du formateur");
+        int id = sc.nextInt();
+        try{
+            afficherFormateur(id);
+        }catch (Exception e){
+            System.out.println(e);
         }
     }
     //Ajouter une promo
     public void addPromo(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Entrer l'id de la promo");
-        int promoID = sc.nextInt();
-        System.out.println("Entrer le nom de la promo");
-        String promoName = sc.next();
 
-        Promo promo = new Promo(promoID, promoName);
-        promos.add(promo);
+        System.out.println("Entrer le nom de la promo");
+        String promoName = sc.nextLine();
+
+        try{
+            insertPromo(promoName);
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+
 
     }
  // afficher les promos
     public void afficherPromo(){
-        for (Promo promo : promos) {
-            System.out.println(promo.toString());
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Entrer nom de la promo");
+        String nom = sc.next();
+        try{
+            afficherPromo(nom);
+        }catch (Exception e){
+            System.out.println(e);
         }
+
     }
 
 
@@ -123,97 +179,51 @@ public class Administrator  extends  Compte {
     public void assignerFormateur(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Entrer l'id du formateur");
-        int formateurID = sc.nextInt();
+        int id = sc.nextInt();
         System.out.println("Entrer l'id de la promo");
-        int promoID = sc.nextInt();
-
-        for (Formateur formateur : formateurs) {
-            if(formateur.getId() == formateurID){
-                for (Promo promo : promos) {
-                    if(promo.getPromoID() == promoID){
-                        formateur.setPromoID(promoID);
-                    }
-                }
-            }
+        int promoId = sc.nextInt();
+        try{
+            assignerPromoToFormateur(id,promoId);
+        }catch (Exception e){
+            System.out.println(e);
         }
     }
-    //assign briefs to a promo
-    public void assignerBrieff(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Entrer l'id de la promo");
-        int promoID = sc.nextInt();
-        System.out.println("Entrer l'id du brief");
-        int briefID = sc.nextInt();
-
-        for (Promo promo : promos) {
-            if(promo.getPromoID() == promoID){
-
-                for (Brief brief : briefs) {
-                    if(brief.getPromoID() == briefID){
-                        brief.setPromoID(promoID);
-
-                        for (Apprenant apprenant : apprenants) {
-                            if(apprenant.getPromoID() == promoID){
-                                sendMail(apprenant.getEmail(), apprenant.nom, apprenant.prenom, brief.getBriefDescription());
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-    }
-
     //afficher le formateur d'une promo
     public void afficherFormateurPromo(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Entrer l'id de la promo");
         int promoID = sc.nextInt();
-
-        for (Promo promo : promos) {
-            if(promo.getPromoID() == promoID){
-                for (Formateur formateur : formateurs) {
-                    if(formateur.getPromoID() == promoID){
-                        System.out.println(formateur);
-                    }
-                }
-            }
-        }
+        afficherFormateurPromo(promoID);
     }
+
     public void createBrief(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("entrer l id du brief");
-        int id = sc.nextInt();
+
         System.out.println("Entrer le nom du brief : ");
         String nom = sc.next();
         System.out.println("Entrer le contenu du brief : ");
         String description = sc.next();
+        System.out.println("Entrer l'id de la promo : ");
+        int promoID = sc.nextInt();
+        System.out.println("Entrer l'id du formateur : ");
+        int formateurID = sc.nextInt();
+        try{
+            insertBrief(nom,description,promoID,formateurID);
+        }catch (Exception e){
+            System.out.println(e);
+        }
 
-        Brief brief = new Brief(id,nom,description,userId);
-        briefs.add(brief);
+
+
     }
     public void afficherBriefs(){
-        for (Brief brief : briefs) {
-            System.out.println(brief.toString());
-        }
-    }
-
-    //ajouter les apprenants a une promo
-    public void addApprenantToPromo(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Entrer l'id de la promo");
-        int promoID = sc.nextInt();
-        System.out.println("Entrer l'id de l'apprenant");
-        int apprenantID = sc.nextInt();
-
-        for (Promo promo : promos) {
-            if(promo.getPromoID() == promoID){
-                for (Apprenant apprenant : apprenants) {
-                    if(apprenant.getPromoID() == apprenantID){
-                        apprenant.setPromoID(promoID);
-                    }
-                }
-            }
+        System.out.println("Entrer le nom du brief : ");
+        String nom = sc.next();
+        try{
+            afficherBrief(nom);
+        }catch (Exception e){
+            System.out.println(e);
         }
     }
 
@@ -222,40 +232,22 @@ public class Administrator  extends  Compte {
 
 
 
-    public void assignerBriefPromo(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Entrer l'id de la promo");
-        int promoID = sc.nextInt();
-        System.out.println("Entrer l'id du brief");
-        int briefID = sc.nextInt();
 
-        for (Promo promo : promos) {
-            System.out.println(promo.getPromoID());
-            if(promo.getPromoID() == promoID){
-                for (Brief brief : briefs) {
-                    if(brief.getBriefID() == briefID){
-                       brief.setPromoID(promoID);
-                    }
-                }
-            }
-        }
-    }
+
+
+
+
     //assigner l'apprenant a une promo
     public void assignerApprenant(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Entrer l'id de l'apprenant");
-        int apprenantID = sc.nextInt();
         System.out.println("Entrer l'id de la promo");
         int promoID = sc.nextInt();
-
-        for (Apprenant apprenant : apprenants) {
-            if(apprenant.getId() == apprenantID){
-                for (Promo promo : promos) {
-                    if(promo.getPromoID() == promoID){
-                        apprenant.setPromoID(promoID);
-                    }
-                }
-            }
+        System.out.println("Entrer l'id de l'apprenant");
+        int apprenantID = sc.nextInt();
+        try{
+            addApprenantToPromo(promoID,apprenantID);
+        }catch (Exception e){
+            System.out.println(e);
         }
     }
 
@@ -263,23 +255,17 @@ public class Administrator  extends  Compte {
     public void afficherApprenantPromo(){
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Entrer l'id de la promo");
+       System.out.println("Entrer l'id de la promo");
         int promoID = sc.nextInt();
-
-        for (Promo promo : promos) {
-            System.out.println("promo id " + promo.getPromoID());
-            if(promo.getPromoID() == promoID){
-                for (Apprenant apprenant : apprenants) {
-                    System.out.println("appartenant id "+apprenant.getPromoID());
-                    if(apprenant.getPromoID() == promoID){
-                        System.out.println(apprenant + " " + promo);
-                    }
-                }
-            }
+        try{
+            afficherApprenantByPromo(promoID);
+        }catch (Exception e){
+            System.out.println(e);
         }
     }
 
     public void sendMail(String email,String nom,String prenom,String title){
+
         Courier.init("pk_prod_9JDC3R4J164P25M1TX88JQ3SC0Q8");
 
         SendEnhancedRequestBody sendEnhancedRequestBody = new SendEnhancedRequestBody();
@@ -305,6 +291,44 @@ public class Administrator  extends  Compte {
             e.printStackTrace();
         }
     }
+
+    //assigner un breif a une promo et envoyer un mail a tous les apprenants de la promo
+    public void assignerBrief() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Entrer l'id du brief");
+        int briefID = sc.nextInt();
+        System.out.println("Entrer l'id de la promo");
+        int promoID = sc.nextInt();
+        try {
+            assignerBrief(briefID, promoID);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        try {
+            List<Brief> briefs = afficherBriefByPromo(promoID);
+            List<Apprenant> apprenants = afficherApprenantByPromo2(promoID);
+            for (Apprenant apprenant : apprenants) {
+                sendMail(apprenant.getEmail(), apprenant.getNom(), apprenant.getPrenom(), briefs.get(0).getNom());
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+
+
+    //envoyer un mail a tous les apprenants de la promo
+
+
+
+
+
+
+
+
+
 
 
 

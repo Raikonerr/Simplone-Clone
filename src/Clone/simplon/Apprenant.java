@@ -9,8 +9,8 @@ public class Apprenant extends Compte{
 
     private Brief brief;
 
-    public Apprenant(int id , String nom , String prenom , String email , int role ) {
-        super(id, nom, prenom, mail, role);
+    public Apprenant(int id , String nom , String prenom , String email , String password ) {
+        super(id, nom, prenom, mail, password);
         mail = email;
     }
 
@@ -61,6 +61,39 @@ public class Apprenant extends Compte{
     //setBrief
     public void setBrief(Brief brief){
         this.brief = brief;
+    }
+
+    public Apprenant get(int i) {
+        return null;
+
+    }
+
+    public int size() {
+        return 0;
+    }
+
+    public String getPrenom() {
+        return this.prenom;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
 

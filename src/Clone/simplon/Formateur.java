@@ -11,8 +11,8 @@ public class Formateur extends Compte {
     public static String mail;
 
     ArrayList<Brief> briefs = new ArrayList<Brief>();
-    public Formateur(int id , String nom , String prenom , String email , int role) {
-        super(id, nom, prenom, email, role);
+    public Formateur(int id , String nom , String prenom , String email , String password ) {
+        super(id, nom, prenom, email, password);
         this.email = mail;
     }
     public Formateur(){

@@ -20,6 +20,10 @@ public class Brief {
         this.formateurID = formateurID;
     }
 
+    public Brief(){
+
+    }
+
     /**
      * @return the briefID
      *
@@ -91,7 +95,25 @@ public class Brief {
     }
 
 
+    public Apprenant get(int i) {
+        return apprenants.get(i);
+    }
 
+    public void setId(int id) {
+        this.briefID = id;
+    }
+
+    public void setNom(String nom) {
+        this.briefName = nom;
+    }
+
+    public void setDescription(String description) {
+        this.briefDescription = description;
+    }
+
+    public String getNom() {
+        return this.briefName;
+    }
 }
 
 

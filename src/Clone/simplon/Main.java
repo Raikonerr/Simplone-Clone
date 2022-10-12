@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
 
-        Administrator admin = new Administrator(1, "admin", "admin", "admin@gmail.com", 0);
+        Administrator admin = new Administrator();
         Formateur formateur = new Formateur();
         Apprenant apprenant = new Apprenant();
 while (true) {
@@ -19,6 +19,7 @@ while (true) {
 
         //check role of the user and display the menu
         if (role.equals("admin")){
+
 
 
 
@@ -147,7 +148,7 @@ switch (choix) {
                         admin.afficherBriefs();
                         break;
                     case 3:
-                        admin.assignerBrieff();
+                        admin.assignerBrief();
                         break;
                     case 4:
                         admin.afficherPromo();
